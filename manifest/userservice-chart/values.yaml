@@ -1,0 +1,42 @@
+userService:
+  image: alstepan/users:1.0
+  port: 8000
+  balancerPort: 80
+  replicas: 2
+  host: arch.homework
+  poolSize: 2
+database:
+  dbname: &db users
+  user: &user userapp
+  password: &pass userpass
+
+postgresql:
+  auth:
+    username: *user
+    password: *pass
+    database: *db
+    postgresPassword: &postgrespass "admin123"
+  service:
+    port: "5432"
+
+  persistence:
+    enabled: true
+    size: 1Gi
+
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
+
+  image:
+    debug: true
+
+  primary:
+    initdb:
+      user: "postgres"
+      password: *postgrespass
+      scripts:
+        init.sql: |-
+          CREATE USER userapp WITH PASSWORD 'userpass';
+          CREATE DATABASE users;
+          GRANT ALL PRIVILEGES ON DATABASE users TO userapp;

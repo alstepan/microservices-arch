@@ -1,0 +1,20 @@
+FROM ghcr.io/graalvm/graalvm-ce:java17-21.3.0 as build
+# install sbt
+RUN mkdir /opt/sbt && \
+    curl https://scala.jfrog.io/artifactory/rpm/sbt-1.6.1.rpm --output /opt/sbt/sbt-1.6.1.rpm && \
+    rpm -i /opt/sbt/sbt-1.6.1.rpm
+# add project sources
+ADD . /opt/project
+# launch build
+WORKDIR /opt/project
+# compile to fat jar
+RUN sbt clean assembly
+
+FROM eclipse-temurin:17-jre-alpine
+ARG port
+RUN mkdir /opt/app
+COPY --from=build /opt/project/target/scala-2.13/Users-assembly-0.1.0.jar  /opt/app/
+RUN chmod +x /opt/app/Users-assembly-0.1.0.jar
+WORKDIR /opt/app
+EXPOSE ${port}/tcp
+CMD ["java", "-jar", "/opt/app/Users-assembly-0.1.0.jar", "--conf", "/etc/users/application.conf"]

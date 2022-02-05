@@ -1,0 +1,16 @@
+apiVersion: v2
+name: userservice-chart
+description: OTUS Homework - User Service Chart
+
+type: application
+
+version: 0.1.0
+
+appVersion: "1.16.0"
+
+dependencies:
+  - name: postgresql
+    repository: https://charts.bitnami.com/bitnami
+    version: "11.0.1"
+    tags:
+      - users-database  	

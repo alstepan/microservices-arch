@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Release.Name }}-users-deployment
+spec:
+    replicas: {{ .Values.userService.replicas }}
+    selector:
+       matchLabels:
+          app: {{ .Release.Name }}-users-app
+    template:
+       metadata:
+          labels:
+             app: {{ .Release.Name }}-users-app
+       spec:
+          containers:
+          - name: {{ .Release.Name }}-user-service
+            image: {{ .Values.userService.image }}
+            imagePullPolicy: IfNotPresent
+            ports:
+              - name: web 
+                containerPort: {{ .Values.userService.port }}
+            volumeMounts:
+            - name: {{ .Release.Name }}-config
+              mountPath: "/etc/users"
+              readOnly: true
+            env:
+            - name: DBUSER
+              valueFrom:
+                secretKeyRef:
+                  key: db-user
+                  name: users-secrets
+            - name: DBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: db-password
+                  name: users-secrets 
+            readinessProbe:
+              httpGet:
+                 path: /health/health
+                 port: {{ .Values.userService.port }}
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              timeoutSeconds: 2
+              failureThreshold: 3
+            livenessProbe:
+              httpGet:
+                 path: /health/liveness
+                 port: {{ .Values.userService.port }}
+              initialDelaySeconds: 10
+              periodSeconds: 5
+              timeoutSeconds: 10
+              failureThreshold: 3
+          volumes:
+          - name: {{ .Release.Name }}-config
+            configMap:
+              name: {{ .Release.Name }}-users-config

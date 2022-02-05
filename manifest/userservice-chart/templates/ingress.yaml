@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-users-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.userService.host }}
+      http:
+        paths:
+          - path: /otusapp/(\w+)/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-users-service
+                port:
+                  number: {{ .Values.userService.balancerPort }}

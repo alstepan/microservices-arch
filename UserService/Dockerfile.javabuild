@@ -1,0 +1,8 @@
+FROM eclipse-temurin:17-jre-alpine
+ARG port
+RUN mkdir /opt/app
+COPY ./target/scala-2.13/Users-assembly-0.1.0.jar  /opt/app/
+RUN chmod +x /opt/app/Users-assembly-0.1.0.jar
+WORKDIR /opt/app
+EXPOSE ${port}/tcp
+CMD ["java", "-jar", "/opt/app/Users-assembly-0.1.0.jar", "--conf", "/etc/users/application.conf"]

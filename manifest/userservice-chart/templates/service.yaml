@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-users-service
+spec:
+  selector:
+    app: {{ .Release.Name }}-users-app
+  ports:
+    - protocol: TCP
+      port: {{ .Values.userService.balancerPort }}
+      targetPort: {{ .Values.userService.port }} 
+  type: LoadBalancer

@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "initdb"
+spec:
+  template:
+    metadata:
+      name: "initdb"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: initdb
+        env:
+          - name: DATABASE_URI
+            value: "postgresql://{{ .Values.database.user }}:{{ .Values.database.password }}@{{ .Release.Name }}-postgresql.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.postgresql.service.port }}/{{ .Values.database.dbname }}"
+        image: bitnami/postgresql:14.1.0-debian-10-r80
+        command:
+          - sh
+          - "-c"
+          - |
+            until pg_isready -d $DATABASE_URI;
+            do echo waiting for database; sleep 1; done;
+            psql $DATABASE_URI <<'EOF'            
+              CREATE TABLE IF NOT EXISTS public.users (
+                ID BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                USERNAME VARCHAR(256) NOT NULL,
+                FIRSTNAME VARCHAR NOT NULL,
+                LASTNAME VARCHAR NOT NULL,
+                EMAIL VARCHAR NOT NULL,
+                PHONE VARCHAR NOT NULL
+              );
+            EOF
+  backoffLimit: 2

@@ -15,10 +15,10 @@
 					"raw": "{\r\n    \"userName\":   \"alexsqwerasdas\",\r\n    \"firstName\": \"Alexanderasdasd\",\r\n    \"lastName\":  \"Stepanasdasdasdaiantsasdasd\",\r\n    \"email\":     \"alex@gmail.comasdas\",\r\n    \"phone\":     \"12345\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/otusapp/user",
+					"raw": "http://arch.homework/otusapp/user",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch.homework"
 					],
 					"path": [
 						"otusapp",
@@ -38,10 +38,10 @@
 					"raw": "{\r\n    \"userName\":   \"alexssss\",\r\n    \"firstName\": \"Alexandeasdasdr\",\r\n    \"lastName\":  \"Stepaniants\",\r\n    \"email\":     \"alex@gmail.com\",\r\n    \"phone\":     \"12345\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/otusapp/user/1",
+					"raw": "http://arch.homework/otusapp/user/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch.homework"
 					],
 					"path": [
 						"otusapp",
@@ -58,7 +58,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/otusapp/user/1",
+					"raw": "http://arch.homework/otusapp/user/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,15 +78,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/otusapp/user/2",
+					"raw": "http://arch.homework/otusapp/user/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch.homework"
 					],
 					"path": [
 						"otusapp",
 						"user",
-						"2"
+						"1"
 					]
 				}
 			},

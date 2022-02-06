@@ -24,3 +24,5 @@ There are two ways of building the image
 2. Run command <br> `helm install first-release userservice-chart`
 The database will be installed as a dependency of userservice-chart.
 3. Esposing a service to localhost (Windows): `minikube tunnel`
+4. Setting up an arch.homework host - please add `127.0.0.1   arch.homework` to your hosts file (C:\windows\system32\drivers\etc\hosts on Windows)
+

@@ -36,7 +36,7 @@ ThisBuild / assemblyMergeStrategy := {
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core"            % "2.7.0",
-  "org.typelevel" %% "cats-effect"          % "3.3.4",
+  "org.typelevel" %% "cats-effect"          % "3.3.5",
   // config
   "com.github.pureconfig" %% "pureconfig"   % "0.17.1",
   // circe
@@ -46,9 +46,11 @@ libraryDependencies ++= Seq(
   "io.circe"      %% "circe-generic"        % "0.14.1",
   "io.circe"      %% "circe-literal"        % "0.14.1",
   // http4s
-  "org.http4s"    %% "http4s-dsl"           % "0.23.7",
-  "org.http4s"    %% "http4s-circe"         % "0.23.7",
-  "org.http4s"    %% "http4s-blaze-server"  % "0.23.7",
+  "org.http4s"    %% "http4s-dsl"           % "0.23.10",
+  "org.http4s"    %% "http4s-circe"         % "0.23.10",
+  //"org.http4s"    %% "http4s-blaze-server"  % "0.23.10",
+  "org.http4s"      %% "http4s-ember-server" % "0.23.10",
+  "org.http4s"    %% "http4s-prometheus-metrics" % "0.23.10",
   //postgres
   "org.postgresql" % "postgresql"           % "42.3.1",
   //doobie

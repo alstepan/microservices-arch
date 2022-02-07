@@ -61,7 +61,7 @@
 					"raw": "http://arch.homework/otusapp/user/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch.homework"
 					],
 					"path": [
 						"otusapp",

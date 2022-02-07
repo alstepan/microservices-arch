@@ -8,6 +8,7 @@ To run this example you need following software installed:
 2. Minikube (following addons needs to be enabled:  default-storageclass,  ingress,  storage-provisioner)
 3. Helm
 4. SBT (Optionally if you aim to build scala application manually)
+5. Newman or Postman (Optionnally, if you want to launch postman collection)
 
 ## Building the docker image
 _Note: This step can be skipped as an image is already published to dockerhub._<br>
@@ -26,3 +27,8 @@ The database will be installed as a dependency of userservice-chart.
 3. Esposing a service to localhost (Windows): `minikube tunnel`
 4. Setting up an arch.homework host - please add `127.0.0.1   arch.homework` to your hosts file (C:\windows\system32\drivers\etc\hosts on Windows)
 
+## Running test
+_Note: Before running tests please wait for 20-30 seconds to allow application to start
+1. Ensure that minikube tunnel is estabilihed ( command `minikube tunnel`)
+2. Change directory to manifest
+3. Launch newman tests: `newman run Homework-Users.postman_collection.json`

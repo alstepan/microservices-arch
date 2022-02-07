@@ -32,3 +32,7 @@ _Note: Before running tests please wait for 20-30 seconds to allow application t
 1. Ensure that minikube tunnel is estabilihed ( command `minikube tunnel`)
 2. Change directory to manifest
 3. Launch newman tests: `newman run Homework-Users.postman_collection.json`
+
+## Running performance tests
+1. Change directory to GatlingTests
+2. Run `sbt GatlintIt/test`

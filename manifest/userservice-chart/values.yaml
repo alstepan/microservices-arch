@@ -1,5 +1,5 @@
 userService:
-  image: alstepan/users:1.0
+  image: alstepan/users:1.0-monitoring
   port: 8000
   balancerPort: 80
   replicas: 2
@@ -18,20 +18,23 @@ postgresql:
     postgresPassword: &postgrespass "admin123"
   service:
     port: "5432"
-
   persistence:
     enabled: true
     size: 1Gi
-
   resources:
     requests:
       memory: 256Mi
       cpu: 250m
-
   image:
     debug: true
-
+  metrics:
+    enabled: true
   primary:
+    podAnnotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/path: "/metrics/cluster"
+      prometheus.io/port: "9187"
+
     initdb:
       user: "postgres"
       password: *postgrespass
@@ -40,3 +43,7 @@ postgresql:
           CREATE USER userapp WITH PASSWORD 'userpass';
           CREATE DATABASE users;
           GRANT ALL PRIVILEGES ON DATABASE users TO userapp;
+
+grafana:
+  adminUser: admin
+  adminPassword: admin

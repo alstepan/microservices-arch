@@ -11,6 +11,10 @@ spec:
        metadata:
           labels:
              app: {{ .Release.Name }}-users-app
+          annotations:
+             prometheus.io/scrape: "true"
+             prometheus.io/path: /metrics
+             prometheus.io/port: {{ .Values.userService.port | quote}}
        spec:
           containers:
           - name: {{ .Release.Name }}-user-service

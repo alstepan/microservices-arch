@@ -8,7 +8,7 @@ import scala.util.Random
 
 class BasicLoad extends Simulation {
 
-  val testDuration = 1.minutes
+  val testDuration = 20.minutes
 
   def randomString = Random.alphanumeric.take(Random.nextInt(15)).mkString
 
@@ -35,6 +35,21 @@ class BasicLoad extends Simulation {
         "email":     "#{email}",
         "phone":     "#{phone}"
       }""".stripMargin
+
+  val errorBody = """{
+        "userName:   "#{userName}",
+        "firstName": "#{firstName}",
+        "lastName":  "#{lastName}",
+        "email":     "#{email}",
+        "phone":     "#{phone}"
+      }""".stripMargin
+  
+  val createUserWithError = scenario("Create user with error")
+    .feed(userRefs)
+    .exec(http("Create user with Error")
+       .post("/user")
+       .body(StringBody(errorBody))
+    )
 
   val createUser = scenario("Create user")
     .feed(userRefs)
@@ -67,9 +82,13 @@ class BasicLoad extends Simulation {
 
   setUp(
     createUser.inject(
-      constantUsersPerSec(20).during(testDuration).randomized,
+      constantUsersPerSec(20).during(testDuration).randomized
     )
       .uniformPauses(0.5),
+
+    createUserWithError.inject(
+      constantUsersPerSec(5).during(testDuration).randomized
+    ).uniformPauses(0.5),
 
     readUser.inject(constantUsersPerSec(20).during(testDuration).randomized)
       .uniformPauses(0.5),

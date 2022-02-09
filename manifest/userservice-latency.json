@@ -1,0 +1,527 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 10,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"get\"}[2m])))",
+          "interval": "",
+          "legendFormat": "50% GET Quantile ({{pod}})",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"post\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "50% POST Quantile ({{pod}})",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"put\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "50% PUT Quantile ({{pod}})",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.5, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"delete\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "50% DELETE Quantile ({{pod}})",
+          "refId": "D"
+        }
+      ],
+      "title": "User service - Latency 50% quantile",
+      "type": "timeseries"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 10,
+        "x": 10,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.9, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"get\"}[2m])))",
+          "interval": "",
+          "legendFormat": "90% GET Quantile ({{pod}})",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.9, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"post\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "90% POST Quantile ({{pod}})",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.9, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"put\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "90% PUT Quantile ({{pod}})",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.9, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"delete\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "90% DELETE Quantile ({{pod}})",
+          "refId": "D"
+        }
+      ],
+      "title": "User service - Latency 90% quantile",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 10,
+        "x": 0,
+        "y": 14
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"get\"}[2m])))",
+          "interval": "",
+          "legendFormat": "99% GET Quantile ({{pod}})",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"post\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "99% POST Quantile ({{pod}})",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"put\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "99% PUT Quantile ({{pod}})",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(0.99, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"delete\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "99% DELETE Quantile ({{pod}})",
+          "refId": "D"
+        }
+      ],
+      "title": "User service - Latency 99% quantile",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 10,
+        "x": 10,
+        "y": 14
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(1, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"get\"}[2m])))",
+          "interval": "",
+          "legendFormat": "Max GET Quantile ({{pod}})",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(1, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"post\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Max POST Quantile ({{pod}})",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(1, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"put\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Max PUT Quantile ({{pod}})",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(1, sum by(pod, le) (rate(userservice_response_duration_seconds_bucket{method=\"delete\"}[2m])))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Max DELETE Quantile ({{pod}})",
+          "refId": "D"
+        }
+      ],
+      "title": "User service - Latency Max quantile",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 34,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "User Service - Latency",
+  "uid": "PjHE1xa7k",
+  "version": 18,
+  "weekStart": ""
+}

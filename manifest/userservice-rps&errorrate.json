@@ -1,0 +1,285 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 13,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{method=\"get\"}[5m])",
+          "interval": "",
+          "legendFormat": "RPS Get - {{pod}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{method=\"post\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "RPS Post - {{pod}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{method=\"put\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "RPS Put - {{pod}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{method=\"delete\"}[5m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "RPS Delete -  {{pod}}",
+          "refId": "D"
+        }
+      ],
+      "title": "User Service - RPS",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 9,
+        "x": 13,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{status=\"5xx\", method=\"get\"}[2m]) / ignoring(status) rate(userservice_request_count_total{status=\"2xx\", method=\"get\"}[2m])",
+          "interval": "",
+          "legendFormat": "Error Rate - GET - {{pod}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{status=\"5xx\", method=\"post\"}[2m]) / ignoring(status) rate(userservice_request_count_total{status=\"2xx\", method=\"post\"}[2m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Error Rate - Post - {{pod}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{status=\"4xx\", method=\"put\"}[2m]) / ignoring(status) rate(userservice_request_count_total{status=\"2xx\", method=\"put\"}[2m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Error Rate Put - {{pod}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "QbIiJb-7k"
+          },
+          "exemplar": true,
+          "expr": "rate(userservice_request_count_total{status=\"5xx\", method=\"delete\"}[2m]) / ignoring(status) rate(userservice_request_count_total{status=\"2xx\", method=\"delete\"}[2m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Error Rate Delete -  {{pod}}",
+          "refId": "D"
+        }
+      ],
+      "title": "User Service - Error Rate",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 34,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "RPS & Error Rate - User Service",
+  "uid": "QJKzlxanz",
+  "version": 1,
+  "weekStart": ""
+}

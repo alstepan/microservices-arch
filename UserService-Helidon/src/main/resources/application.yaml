@@ -1,0 +1,18 @@
+
+app:
+  greeting: "Hello"
+
+server:
+  port: 8000
+  host: 0.0.0.0
+
+db:
+  source: "jdbc"
+  connection:
+    url: "jdbc:postgresql://host.docker.internal:5432/users"
+    username: "docker"
+    password: "docker"
+    poolName: "hikariPool"
+    initializationFailTimeout: -1
+    connectionTimeout: 2000
+
